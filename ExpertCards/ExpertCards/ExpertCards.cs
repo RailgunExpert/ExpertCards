@@ -12,6 +12,9 @@ using ModdingUtils.Utils;
 
 namespace ExpertCards
 {
+    // hard dependencies for Unbound and ModdingUtils
+    [BepInDependency("com.willis.rounds.unbound", BepInDependency.DependencyFlags.HardDependency)]
+    [BepInDependency("pykess.rounds.plugins.moddingutils", BepInDependency.DependencyFlags.HardDependency)] 
     [BepInPlugin("org.bepinex.plugins.ExpertCards", "ExpertCards", "0.1")]
     [BepInProcess("ROUNDS.exe")]
     public class ExpertCards : BaseUnityPlugin
