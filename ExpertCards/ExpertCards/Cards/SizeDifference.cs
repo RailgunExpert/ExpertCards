@@ -11,9 +11,11 @@ namespace ExpertCards.Cards
     {
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            SizeDifferenceEffect sizeDifferenceEffect = player.gameObject.AddComponent<SizeDifferenceEffect>();
-            //characterStats.sizeMultiplier *= 2f;
-            sizeDifferenceEffect.stats = characterStats;
+            // use GetOrAdd to make sure duplicate components aren't added
+            SizeDifferenceEffect sizeDifferenceEffect = player.gameObject.GetOrAddComponent<SizeDifferenceEffect>();
+            
+            // double the baseSizeMultiplier for each card added
+            sizeDifferenceEffect.baseSizeMult *= 2f;
         }
 
         public override void OnRemoveCard()
