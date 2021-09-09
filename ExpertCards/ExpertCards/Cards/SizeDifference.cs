@@ -13,7 +13,6 @@ namespace ExpertCards.Cards
         {
             SizeDifferenceEffect sizeDifferenceEffect = player.gameObject.AddComponent<SizeDifferenceEffect>();
             //characterStats.sizeMultiplier *= 2f;
-            sizeDifferenceEffect.player = player;
             sizeDifferenceEffect.stats = characterStats;
         }
 

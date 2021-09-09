@@ -6,34 +6,29 @@ using System.Reflection;
 using UnboundLib;
 using UnboundLib.Networking;
 using UnityEngine;
+using ModdingUtils.MonoBehaviours;
 
 namespace ExpertCards.MonoBehaviours
 {
-    class SizeDifferenceEffect : MonoBehaviour
+    class SizeDifferenceEffect : ReversibleEffect
     {
-        public Player player;
-
         public CharacterStatModifiers stats;
-
-        public Gun gun;
-
-        public CharacterData data;
 
         private float preModifiedSize = 1f;
 
-        private float currentSizeMult = 10f;
+        private float currentSizeMult = 5f;
 
         private float targetTime = 2f;
 
-        private void Awake()
+        public override void OnStart()
         {
-            player = base.gameObject.GetComponent<Player>();
-            stats = player.gameObject.GetComponent<CharacterStatModifiers>();
-            preModifiedSize = stats.sizeMultiplier;
-            stats.sizeMultiplier *= currentSizeMult;
+            preModifiedSize = characterStatModifiersModifier.sizeMultiplier_mult;
+            base.characterStatModifiersModifier.sizeMultiplier_mult *= currentSizeMult;
+            UnityEngine.Debug.Log(base.characterStatModifiersModifier.sizeMultiplier_mult);
+            ApplyModifiers();
         }
 
-        private void Update()
+        public override void OnUpdate()
         {
             targetTime -= Time.deltaTime;
             if(targetTime < 0.0f)
