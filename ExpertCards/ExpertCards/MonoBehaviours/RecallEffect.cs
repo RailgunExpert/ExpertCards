@@ -66,6 +66,11 @@ namespace ExpertCards.MonoBehaviours
                 }
             };
         }
+        private void OnDestroy()
+        {
+            block.BlockAction = (Action<BlockTrigger.BlockTriggerType>)Delegate.Remove(block.BlockAction, recallAction);
+        }
+
 
         private void Update()
         {

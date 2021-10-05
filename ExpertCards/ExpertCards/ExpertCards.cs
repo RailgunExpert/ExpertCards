@@ -14,14 +14,14 @@ namespace ExpertCards
 {
     // hard dependencies for Unbound and ModdingUtils
     [BepInDependency("com.willis.rounds.unbound", BepInDependency.DependencyFlags.HardDependency)]
-    [BepInDependency("pykess.rounds.plugins.moddingutils", BepInDependency.DependencyFlags.HardDependency)] 
-    [BepInPlugin("org.bepinex.plugins.ExpertCards", "ExpertCards", "0.1")]
+    [BepInDependency("pykess.rounds.plugins.moddingutils", BepInDependency.DependencyFlags.HardDependency)]
+    [BepInPlugin("org.bepinex.plugins.ExpertCards", "ExpertCards", "0.2")]
     [BepInProcess("ROUNDS.exe")]
     public class ExpertCards : BaseUnityPlugin
     {
         void Awake()
         {
-            
+
         }
 
         void Start()
@@ -29,7 +29,7 @@ namespace ExpertCards
             Unbound.RegisterCredits("Expert Cards", new string[1]
         {
             "RailgunExpert"
-        },new string[2]
+        }, new string[2]
         {
             "idk what to put here",
             "i just wanted a credits page"
@@ -43,7 +43,9 @@ namespace ExpertCards
             CustomCard.BuildCard<SmashBro>();
             CustomCard.BuildCard<Recall>();
             CustomCard.BuildCard<SizeDifference>();
+            CustomCard.BuildCard<SecondWind>();
+            CustomCard.BuildCard<Instability>();
         }
     }
-        
+
 }

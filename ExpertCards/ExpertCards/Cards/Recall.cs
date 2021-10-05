@@ -64,5 +64,10 @@ namespace ExpertCards.Cards
         public override void OnRemoveCard()
         {
         }
+
+        public override string GetModName()
+        {
+            return "EXC";
+        }
     }
 }

@@ -1,21 +1,14 @@
-﻿using System;
-using UnboundLib;
+﻿using UnboundLib;
 using UnboundLib.Cards;
 using UnityEngine;
-using ExpertCards.Cards;
-using ExpertCards.MonoBehaviours;
 
 namespace ExpertCards.Cards
 {
-    class SizeDifference : CustomCard
+    class template : CustomCard
     {
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            // use GetOrAdd to make sure duplicate components aren't added
-            SizeDifferenceEffect sizeDifferenceEffect = player.gameObject.GetOrAddComponent<SizeDifferenceEffect>();
-
-            // double the baseSizeMultiplier for each card added
-            sizeDifferenceEffect.baseSizeMult *= 1.5f;
+            
         }
 
         public override void OnRemoveCard()
@@ -33,12 +26,12 @@ namespace ExpertCards.Cards
 
         protected override string GetDescription()
         {
-            return "Become massive, but shrink during the round.";
+            return "";
         }
 
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Rare;
+            return CardInfo.Rarity.Common;
         }
 
         protected override CardInfoStat[] GetStats()
@@ -47,9 +40,9 @@ namespace ExpertCards.Cards
             {
                 new CardInfoStat
                 {
-                    positive = true,
-                    stat = "Size",
-                    amount = "100%",
+                    positive = false,
+                    stat = "",
+                    amount = "",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 }
             };
@@ -57,12 +50,12 @@ namespace ExpertCards.Cards
 
         protected override CardThemeColor.CardThemeColorType GetTheme()
         {
-            return CardThemeColor.CardThemeColorType.EvilPurple;
+            return CardThemeColor.CardThemeColorType.NatureBrown;
         }
 
         protected override string GetTitle()
         {
-            return "Size Difference";
+            return "";
         }
         public override string GetModName()
         {

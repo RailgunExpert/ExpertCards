@@ -9,7 +9,7 @@ namespace ExpertCards.Cards
     {
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            gun.knockback = 500f / (gun.projectiles.Length * 2);
+            gun.knockback *= 500f / (gun.projectiles.Length * 2);
             gun.damage *= .1f;
         }
 
@@ -65,6 +65,10 @@ namespace ExpertCards.Cards
         protected override string GetTitle()
         {
             return "Smash Brother";
+        }
+        public override string GetModName()
+        {
+            return "EXC";
         }
     }
 }
