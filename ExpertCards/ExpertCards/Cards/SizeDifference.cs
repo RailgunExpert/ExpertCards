@@ -13,9 +13,12 @@ namespace ExpertCards.Cards
         {
             // use GetOrAdd to make sure duplicate components aren't added
             SizeDifferenceEffect sizeDifferenceEffect = player.gameObject.GetOrAddComponent<SizeDifferenceEffect>();
-
-            // double the baseSizeMultiplier for each card added
-            sizeDifferenceEffect.baseSizeMult *= 1.5f;
+            characterStats.sizeMultiplier += 3f;
+            data.maxHealth *= 3f;
+            sizeDifferenceEffect.baseHpMult = data.maxHealth;
+            sizeDifferenceEffect.baseSizeMult = characterStats.sizeMultiplier;
+            sizeDifferenceEffect.minimumSizeMult = (float)(0.5 * Math.Exp(-0.231 * characterStats.sizeMultiplier));
+            sizeDifferenceEffect.minimumHpMult = (float)(0.5 * Math.Exp(-0.007 * data.maxHealth));
         }
 
         public override void OnRemoveCard()
@@ -43,13 +46,27 @@ namespace ExpertCards.Cards
 
         protected override CardInfoStat[] GetStats()
         {
-            return new CardInfoStat[1]
+            return new CardInfoStat[3]
             {
                 new CardInfoStat
                 {
                     positive = true,
                     stat = "Size",
-                    amount = "100%",
+                    amount = "+300%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat
+                {
+                    positive = true,
+                    stat = "Health",
+                    amount = "+300%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat
+                {
+                    positive = false,
+                    stat = "Size and Health over time",
+                    amount = "-",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 }
             };
