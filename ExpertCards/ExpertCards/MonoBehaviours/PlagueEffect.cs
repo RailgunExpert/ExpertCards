@@ -27,6 +27,8 @@ namespace ExpertCards.MonoBehaviours
         }
         private void Update()
         {
+            if (!ExpertCards.BattleOngoing)
+                return;
             if (RangeCheck())
             {
                 foreach (Player enemy in GetEnemyPlayers())
@@ -38,7 +40,6 @@ namespace ExpertCards.MonoBehaviours
                     {
                         Vector2 damage = new Vector2(0, (enemyData.maxHealth * this.damagePercent) * Time.deltaTime);
                         enemyData.healthHandler.DoDamage(damage, enemyPos, color, null, this.player, false, true, true);
-
                     }
                 }
             }

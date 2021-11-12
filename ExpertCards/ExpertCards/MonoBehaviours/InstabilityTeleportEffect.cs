@@ -7,16 +7,17 @@ using UnboundLib;
 using UnboundLib.Networking;
 using UnityEngine;
 using ModdingUtils.MonoBehaviours;
+using ModdingUtils.Extensions;
 
 namespace ExpertCards.MonoBehaviours
 {
     class InstabilityTeleportEffect : MonoBehaviour
     {
-        public Player player;
+        private Player player;
 
         internal int numTeleports = 5;
 
-        private const float defaultTeleportTime = .4f;
+        private const float defaultTeleportTime = .3f;
 
         private float targetTime = defaultTeleportTime;
 
@@ -24,7 +25,7 @@ namespace ExpertCards.MonoBehaviours
 
         private Vector3 initialPos;
 
-        private void Awake()
+        private void Start()
         {
             player = base.gameObject.GetComponent<Player>();
             initialPos = player.transform.position;
@@ -37,16 +38,22 @@ namespace ExpertCards.MonoBehaviours
             {
                 if (this.currentTeleport < this.numTeleports)
                 {
-                    initialPos.x += UnityEngine.Random.Range(-7.5f, 7.5f);
-                    initialPos.y += UnityEngine.Random.Range(-7.5f, 7.5f);
+                    initialPos.x += UnityEngine.Random.Range(-5f, 5f);
+                    initialPos.y += UnityEngine.Random.Range(-5f, 5f);
                     player.transform.position = initialPos;
                     player.GetComponentInParent<PlayerCollision>().IgnoreWallForFrames(2);
                     this.currentTeleport++;
+                    player.data.playerVel.SetFieldValue("velocity", Vector2.zero);
+                    initialPos = player.transform.position;
                 }
                 else
                     Destroy(this);
                 targetTime = InstabilityTeleportEffect.defaultTeleportTime;
             }
+        }
+        private void OnDisable()
+        {
+            Destroy(this);
         }
     }
 }

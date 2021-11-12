@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnboundLib;
 using UnboundLib.Cards;
 using UnityEngine;
@@ -12,8 +13,8 @@ namespace ExpertCards.Cards
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             data.maxHealth *= 1.25f;
-            PlagueEffect plague = player.gameObject.GetOrAddComponent<PlagueEffect>();
-            plague.damagePercent += .10f;
+            //PlagueEffect plague = player.gameObject.GetOrAddComponent<PlagueEffect>();
+            //plague.damagePercent += .10f;
         }
 
         public override void OnRemoveCard()
@@ -36,7 +37,7 @@ namespace ExpertCards.Cards
 
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Uncommon;
+            return CardInfo.Rarity.Common;
         }
 
         protected override CardInfoStat[] GetStats()
@@ -58,7 +59,6 @@ namespace ExpertCards.Cards
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 }
             };
-
         }
 
         protected override CardThemeColor.CardThemeColorType GetTheme()

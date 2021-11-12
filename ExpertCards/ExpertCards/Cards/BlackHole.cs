@@ -1,18 +1,26 @@
 ﻿using System;
 using UnboundLib;
 using UnboundLib.Cards;
-using ModdingUtils.Extensions;
-using ModdingUtils.RoundsEffects;
 using UnityEngine;
-using ExpertCards.RoundsEffects;
+using ExpertCards.Cards;
+using ExpertCards.MonoBehaviours;
 
 namespace ExpertCards.Cards
 {
-    class Instability : CustomCard
+    class BlackHole : CustomCard
     {
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            player.gameObject.GetOrAddComponent<InstabilityDealtDamageEffect>();
+            gun.gravity = 0f;
+            gun.projectileSpeed *= .5f;
+            var obj = new GameObject("BlackHole", typeof(BlackHoleEffect));
+            gun.objectsToSpawn = new[]
+            {
+                new ObjectsToSpawn()
+                {
+                    AddToProjectile = obj
+                }
+            };
         }
 
         public override void OnRemoveCard()
@@ -21,7 +29,6 @@ namespace ExpertCards.Cards
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers)
         {
-            cardInfo.allowMultiple = false;
         }
 
         protected override GameObject GetCardArt()
@@ -31,7 +38,7 @@ namespace ExpertCards.Cards
 
         protected override string GetDescription()
         {
-            return "Your shots cause the enemy to teleport randomly for a bit";
+            return "Bullets drag nearby enemies towards the bullet.";
         }
 
         protected override CardInfo.Rarity GetRarity()
@@ -41,26 +48,33 @@ namespace ExpertCards.Cards
 
         protected override CardInfoStat[] GetStats()
         {
-            return new CardInfoStat[1]
-            {
+            return new CardInfoStat[2]
+          {
+                new CardInfoStat
+                {
+                    positive = false,
+                    stat = "Bullet Speed",
+                    amount = "-50%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
                 new CardInfoStat
                 {
                     positive = true,
-                    stat = "Instability Bullets",
-                    amount = "+",
+                    stat = "Bullet Gravity",
+                    amount = "None",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 }
-            };
+          };
         }
 
         protected override CardThemeColor.CardThemeColorType GetTheme()
         {
-            return CardThemeColor.CardThemeColorType.EvilPurple;
+            return CardThemeColor.CardThemeColorType.TechWhite;
         }
 
         protected override string GetTitle()
         {
-            return "Instability";
+            return "Black Hole";
         }
         public override string GetModName()
         {
@@ -68,4 +82,3 @@ namespace ExpertCards.Cards
         }
     }
 }
-
