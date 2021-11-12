@@ -16,10 +16,8 @@ namespace ExpertCards.RoundsEffects
         public override void DealtDamage(Vector2 damage, bool selfDamage, Player damagedPlayer = null)
         {
             if (damagedPlayer == null) { return; }
-
+            if(damagedPlayer.data.dead) { return; }
             InstabilityTeleportEffect ite = damagedPlayer.gameObject.GetOrAddComponent<InstabilityTeleportEffect>();
-
-
         }
     }
 }

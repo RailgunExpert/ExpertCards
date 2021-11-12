@@ -11,7 +11,7 @@ using ModdingUtils.Extensions;
 
 namespace ExpertCards.MonoBehaviours
 {
-    class InstabilityTeleportEffect : MonoBehaviour
+    class InstabilityTeleportEffect : ReversibleEffect
     {
         private Player player;
 
@@ -25,13 +25,13 @@ namespace ExpertCards.MonoBehaviours
 
         private Vector3 initialPos;
 
-        private void Start()
+        public override void OnStart()
         {
             player = base.gameObject.GetComponent<Player>();
             initialPos = player.transform.position;
         }
 
-        private void Update()
+        public override void OnUpdate()
         {
             targetTime -= Time.deltaTime;
             if (this.targetTime < 0)
@@ -39,7 +39,7 @@ namespace ExpertCards.MonoBehaviours
                 if (this.currentTeleport < this.numTeleports)
                 {
                     initialPos.x += UnityEngine.Random.Range(-5f, 5f);
-                    initialPos.y += UnityEngine.Random.Range(-5f, 5f);
+                    initialPos.y += UnityEngine.Random.Range(-5f, 5f); 
                     player.transform.position = initialPos;
                     player.GetComponentInParent<PlayerCollision>().IgnoreWallForFrames(2);
                     this.currentTeleport++;
@@ -51,7 +51,7 @@ namespace ExpertCards.MonoBehaviours
                 targetTime = InstabilityTeleportEffect.defaultTeleportTime;
             }
         }
-        private void OnDisable()
+        public override void OnOnDisable()
         {
             Destroy(this);
         }

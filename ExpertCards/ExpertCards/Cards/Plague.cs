@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using UnboundLib;
 using UnboundLib.Cards;
 using UnityEngine;
@@ -37,7 +36,7 @@ namespace ExpertCards.Cards
 
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Common;
+            return CardInfo.Rarity.Uncommon;
         }
 
         protected override CardInfoStat[] GetStats()
@@ -59,6 +58,7 @@ namespace ExpertCards.Cards
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 }
             };
+
         }
 
         protected override CardThemeColor.CardThemeColorType GetTheme()
