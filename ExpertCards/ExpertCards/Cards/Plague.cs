@@ -13,8 +13,8 @@ namespace ExpertCards.Cards
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             data.maxHealth *= 1.25f;
-            //PlagueEffect plague = player.gameObject.GetOrAddComponent<PlagueEffect>();
-            //plague.damagePercent += .10f;
+            PlagueEffect plague = player.gameObject.GetOrAddComponent<PlagueEffect>();
+            plague.damagePercent += .10f;
         }
 
         public override void OnRemoveCard()
